@@ -4,29 +4,13 @@
 //
 //  Created by Ryan Shim on 2021-09-19.
 //
-#include <iostream>
-#include <thread>
-#include <string>
-#include <stdio.h>
-#include <string.h>   //strlen
-#include <stdlib.h>
-#include <errno.h>
-#include <unistd.h>   //close
-#include <arpa/inet.h>    //close
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <sys/time.h> //FD_SET, FD_ISSET, FD_ZERO macros
-     
-#define TRUE   1
-#define FALSE  0
-#define PORT 8888
-     
-int main(int argc , char *argv[])
+#include "servers.hpp"
+
+int Server::start_server()
 {
     int opt = TRUE;
     int master_socket , addrlen , new_socket , client_socket[30] ,
-          max_clients = 30 , activity, i , valread , sd;
+          max_clients = 30 , activity, i , sd;
     int max_sd;
     struct sockaddr_in address;
          
@@ -86,7 +70,6 @@ int main(int argc , char *argv[])
          
     while(TRUE)
     {
-        std::cout << "looped" << std::endl;
         //clear the socket set
         FD_ZERO(&readfds);
         memset(&buffer, 0, sizeof(buffer));
